@@ -5,7 +5,6 @@ services:
   app:
     container_name: kotlindev
     build:
-      context: .
       dockerfile: Dockerfile
     depends_on:
       - db
