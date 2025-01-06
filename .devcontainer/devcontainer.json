@@ -3,5 +3,6 @@
   "remoteUser": "developer",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
-  "workspaceFolder": "/workspace"
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose"
 }
