@@ -1,0 +1,36 @@
+services:
+  db:
+    container_name: postgresdb
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+
+  app:
+    container_name: spring-boot-container
+    image: eclipse-temurin:17-jdk
+    working_dir: /app
+    command: ./gradlew bootRun
+    restart: always
+    ports:
+      - "8080:8080"
+    volumes:
+      # 루트(.)를 컨테이너의 /app 으로 마운트
+      - .:/app:cached
+      - gradle_cache:/home/gradle/.gradle
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
+  gradle_cache:

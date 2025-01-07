@@ -7,5 +7,5 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class MessageController {
     @GetMapping("/")
-    fun index(@RequestParam("name") name: String) = "Hello $name!"
+    fun index(@RequestParam("name") name: String) = "Hello $name"
 }
